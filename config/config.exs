@@ -14,6 +14,8 @@ config :daily_routine, DailyRoutine.Endpoint,
   pubsub: [name: DailyRoutine.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
+config :daily_routine, ecto_repos: [DailyRoutine.Repo]
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",

@@ -12,8 +12,6 @@ config :logger, level: :warn
 # Configure your database
 config :daily_routine, DailyRoutine.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
   database: "daily_routine_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
