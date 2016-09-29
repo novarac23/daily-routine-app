@@ -1,0 +1,23 @@
+
+  <h2>Listing Routines</h2>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Time</th>
+        <th>Content</th>
+
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+    <%= for routine <- @routines do %>
+      <tr>
+        <td><%= routine.title %></td>
+        <td><%= routine.timeframe %></td>
+        <td><%= routine.content %></td>
+      </tr>
+    <% end %>
+	</tbody>
+</table>

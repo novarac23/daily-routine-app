@@ -1,0 +1,5 @@
+<h2>Create your routine!</h2>
+
+<%= render "form.html", changeset: @changeset, action: routine_path(@conn, :create) %>
+
+<%= link "Back", to: routine_path(@conn, :index) %>
