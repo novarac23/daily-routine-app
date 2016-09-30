@@ -1,0 +1,24 @@
+<h2>Here is the awesome routine: </h2>
+
+<ul>
+
+	<li>
+		<strong>Title:</strong>
+		<%= @routine.title %>
+	</li>
+
+	<li>
+		<strong>How much time will it take?</strong>
+		<%= @routine.timeframe %> hours
+	</li>
+
+	<li>
+		<strong>Description:</strong>
+		<%= @routine.content %>
+	</li>
+
+</ul>
+
+<p><%= link "Edit", to: routine_path(@conn, :edit, @routine) %></p>
+
+<p><%= link "Back", to: routine_path(@conn, :index) %></p>

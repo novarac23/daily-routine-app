@@ -7,7 +7,6 @@
         <th>Title</th>
         <th>Time</th>
         <th>Content</th>
-
         <th></th>
       </tr>
     </thead>
@@ -17,6 +16,7 @@
         <td><%= routine.title %></td>
         <td><%= routine.timeframe %></td>
         <td><%= routine.content %></td>
+        <td><%= link "Show", to: routine_path(@conn, :show, routine) %></td>
       </tr>
     <% end %>
 	</tbody>

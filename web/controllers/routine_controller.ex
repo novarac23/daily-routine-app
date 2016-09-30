@@ -7,6 +7,12 @@ defmodule DailyRoutine.RoutineController do
     render conn, "index.html", routines: routines
   end
 
+  def show(conn, %{"id" => id}) do
+     routine = Repo.get!(Routine, id)
+
+    render conn, "show.html", routine: routine
+  end
+
   def new(conn, _params) do
     changeset = Routine.changeset()
 
