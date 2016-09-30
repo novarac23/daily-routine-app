@@ -17,6 +17,8 @@
         <td><%= routine.timeframe %></td>
         <td><%= routine.content %></td>
         <td><%= link "Show", to: routine_path(@conn, :show, routine) %></td>
+        <td><%= link "Edit", to: routine_path(@conn, :edit, routine) %></td>
+        <td><%= link "Delete", to: routine_path(@conn, :delete, routine), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></td>
       </tr>
     <% end %>
 	</tbody>
