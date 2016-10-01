@@ -12,7 +12,7 @@ defmodule DailyRoutine.Routine do
   @required_fields ~w(title timeframe content)
   @optional_fields ~w()
 
-  def changeset(model, params \\ :empty) do
+  def changeset(model, params \\ :invalid) do
     model
     |> cast(params, @required_fields, @optional_fields)
   end

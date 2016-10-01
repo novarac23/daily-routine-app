@@ -7,6 +7,7 @@ defmodule DailyRoutine.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug DailyRoutine.Auth, repo: DailyRoutine.Repo
   end
 
   pipeline :api do
@@ -17,11 +18,17 @@ defmodule DailyRoutine.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
-    resources "/routines", RoutineController
+
+    get "/sign-up", UserController, :new
+    resources "/users", UserController, only: [:create]
+
+    get "/log-in", SessionController, :new
+    resources "/sessions", SessionController, only: [:create, :delete]
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", DailyRoutine do
-  #   pipe_through :api
-  # end
+  scope "/app", DailyRoutine do
+    pipe_through [:browser, :authenticate_user]
+
+    resources "/routines", RoutineController
+  end
 end

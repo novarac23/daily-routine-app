@@ -58,6 +58,8 @@ defmodule DailyRoutine.Web do
   def router do
     quote do
       use Phoenix.Router
+
+      import DailyRoutine.Auth, only: [authenticate_user: 2]
     end
   end
 

@@ -1,6 +1,7 @@
 
   <h2>Listing Routines</h2>
 
+  <p><%= link "New Routine", to: routine_path(@conn, :new) %></p>
   <table class="table">
     <thead>
       <tr>

@@ -1,0 +1,26 @@
+<h3> Sign Up To Discover Routines Of Successful People </h3>
+
+<%= form_for @changeset, user_path(@conn, :create), fn f -> %>
+	<%= if @changeset.action do %>
+		<div class="alert alert-danger">
+			Son of a biscuit! Something went wrong :/
+		</div>
+	<% end %>
+
+	<div class="form-group">
+		<%= text_input f, :name, placeholder: "Your name mate!", class: "form-control" %>
+		<%= error_tag f, :name %>
+	</div>
+
+	<div class="form-group">
+		<%= text_input f, :username, placeholder: "Enter your username!", class: "form-control" %>
+		<%= error_tag f, :username %>
+	</div>
+
+	<div class="form-group">
+		<%= password_input f, :password, placeholder: "Enter your secret password!", class: "form-control" %>
+		<%= error_tag f, :password %>
+	</div>
+
+	<%= submit "Create An Account", class: "btn btn-primary" %>
+<% end %>
