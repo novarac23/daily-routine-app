@@ -2,8 +2,10 @@ defmodule DailyRoutine.RoutineController do
   use DailyRoutine.Web, :controller
   alias DailyRoutine.Routine
 
-  def index(conn, _params) do
-    routines = Repo.all Routine
+  plug :scrub_params, "routines" when action in [:create, :update]
+
+  def index(conn, _params, user) do
+    routines = Repo.all(user_videos(user))
     render conn, "index.html", routines: routines
   end
 
@@ -13,10 +15,29 @@ defmodule DailyRoutine.RoutineController do
     render conn, "show.html", routine: routine
   end
 
-  def new(conn, _params) do
-    changeset = Routine.changeset(%Routine{})
+  def new(conn, _params, user) do
+    changeset =
+      user
+      |> build_assoc(:resources)
+      |> Routine.changeset()
 
     render conn, "new.html", changeset: changeset
+  end
+
+  def create(conn, %{"routine" => routine_params}, user) do
+    changeset =
+      user
+      |> build_assoc(:resources)
+      |> Routine.changeset(routine_params)
+
+    case Repo.insert(changeset) do
+      {:ok, routine} ->
+        conn
+        |> put_flash(:info, "Your routine was successfully created!")
+        |> redirect(to: routine_path(conn, :index))
+      {:error, changeset} ->
+        render conn, "new.html", changeset: changeset
+    end
   end
 
   def edit(conn, %{"id" => id}) do
@@ -40,18 +61,6 @@ defmodule DailyRoutine.RoutineController do
 
   end
 
-  def create(conn, %{"routine" => routine_params}) do
-    changeset = Routine.changeset(%Routine{}, routine_params)
-
-    case Repo.insert(changeset) do
-      {:ok, routine} ->
-        conn
-        |> put_flash(:info, "Your routine was successfully created!")
-        |> redirect(to: routine_path(conn, :index))
-      {:error, changeset} ->
-        render conn, "new.html", changeset: changeset
-    end
-  end
 
   def delete(conn, %{"id" => id}) do
     routine = Repo.get(Routine, id)
@@ -61,6 +70,10 @@ defmodule DailyRoutine.RoutineController do
     conn
 		|> put_flash(:info, "Routine deleted successfully.")
 		|> redirect(to: routine_path(conn, :index))
+  end
+
+  def user_routines(user) do
+    assoc(user, :routines)
   end
 end
 

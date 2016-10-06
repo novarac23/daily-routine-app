@@ -5,6 +5,7 @@ defmodule DailyRoutine.Routine do
     field :title, :string
     field :timeframe, :integer
     field :content, :string
+    belongs_to :user, DailyRoutine.User
 
     timestamps
   end
