@@ -3,7 +3,7 @@
 <ul>
 
 	<li>
-		<strong>Title:</strong>
+		<strong>title:</strong>
 		<%= @routine.title %>
 	</li>
 
