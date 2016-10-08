@@ -5,6 +5,7 @@
   <table class="table">
     <thead>
       <tr>
+        <th>Created By</th>
         <th>Title</th>
         <th>Time</th>
         <th>Content</th>
@@ -14,12 +15,13 @@
     <tbody>
     <%= for routine <- @routines do %>
       <tr>
+        <td><%= users_name(routine.user) %></td>
         <td><%= routine.title %></td>
         <td><%= routine.timeframe %></td>
         <td><%= routine.content %></td>
         <td><%= link "Show", to: routine_path(@conn, :show, routine) %></td>
-        <td><%= link "Edit", to: routine_path(@conn, :edit, routine) %></td>
-        <td><%= link "Delete", to: routine_path(@conn, :delete, routine), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></td>
+        <td><%= edit_link(@conn, routine, routine.user) %></td>
+        <td><%= delete_button(@conn, routine, routine.user) %></td>
       </tr>
     <% end %>
 	</tbody>

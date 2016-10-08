@@ -1,6 +1,10 @@
 <h2>Here is the awesome routine: </h2>
 
 <ul>
+	<li>
+		<strong>creator:</strong>
+		<%= @routine.user.name %>
+	</li>
 
 	<li>
 		<strong>title:</strong>

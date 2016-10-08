@@ -1,0 +1,1 @@
+<%= link "Delete", to: routine_path(@conn, :delete, @routine), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>

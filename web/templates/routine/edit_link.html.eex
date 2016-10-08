@@ -1,0 +1,1 @@
+<%= link "Edit", to: routine_path(@conn, :edit, @routine) %>

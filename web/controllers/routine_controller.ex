@@ -3,12 +3,12 @@ defmodule DailyRoutine.RoutineController do
   alias DailyRoutine.Routine
 
   def index(conn, _params, user) do
-    routines = Repo.all(user_routines(user))
+    routines = Repo.all(Routine) |> Repo.preload(:user)
     render conn, "index.html", routines: routines
   end
 
   def show(conn, %{"id" => id}, user) do
-     routine = Repo.get!(user_routines(user), id)
+     routine = Repo.get!(Routine, id) |> Repo.preload(:user)
 
     render conn, "show.html", routine: routine
   end
