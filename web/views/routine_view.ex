@@ -16,4 +16,10 @@ defmodule DailyRoutine.RoutineView do
       render "delete_button.html", routine: routine, conn: conn
     end
   end
+
+  def delete_comment(conn, routine, user, comment) do
+    if conn.assigns.current_user.id == user.id do
+      render "delete_comment.html", routine: routine, comment: comment, conn: conn
+    end
+  end
 end

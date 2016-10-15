@@ -29,6 +29,8 @@ defmodule DailyRoutine.Router do
   scope "/app", DailyRoutine do
     pipe_through [:browser, :authenticate_user]
 
-    resources "/routines", RoutineController
+    resources "/routines", RoutineController do
+      resources "/comments", CommentController, only: [:create, :delete]
+    end
   end
 end

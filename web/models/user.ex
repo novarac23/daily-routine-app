@@ -7,6 +7,7 @@ defmodule DailyRoutine.User do
     field :password, :string, virtual: true
     field :password_hash, :string
     has_many :routines, DailyRoutine.Routine
+    has_many :comments, DailyRoutine.Comment
 
     timestamps
   end

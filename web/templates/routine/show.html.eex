@@ -23,6 +23,13 @@
 
 </ul>
 
-<p><%= link "Edit", to: routine_path(@conn, :edit, @routine) %></p>
+<p><i>Comments:</i></p>
+<hr>
+<%= for comment <- @comments do %>
+  <p><b><%= comment.user.name %></b> - <%= comment.content %> <%= delete_comment(@conn, @routine, comment.user, comment) %></p>
+  <hr>
+<% end %>
+
+<%= render "comment_form.html", changeset: @changeset, routine: @routine, action: routine_comment_path(@conn, :create, @routine) %>
 
 <p><%= link "Back", to: routine_path(@conn, :index) %></p>

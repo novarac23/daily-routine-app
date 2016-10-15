@@ -1,6 +1,7 @@
 defmodule DailyRoutine.RoutineController do
   use DailyRoutine.Web, :controller
   alias DailyRoutine.Routine
+  alias DailyRoutine.Comment
 
   def index(conn, _params, user) do
     routines = Repo.all(Routine) |> Repo.preload(:user)
@@ -8,9 +9,17 @@ defmodule DailyRoutine.RoutineController do
   end
 
   def show(conn, %{"id" => id}, user) do
-     routine = Repo.get!(Routine, id) |> Repo.preload(:user)
+    routine =
+      Repo.get!(Routine, id)
+      |> Repo.preload(:user)
 
-    render conn, "show.html", routine: routine
+    comments =
+      Comment.query_comments(Comment, id)
+      |> Repo.all()
+
+    changeset = Comment.changeset(%Comment{})
+
+    render conn, "show.html", changeset: changeset, routine: routine, comments: comments
   end
 
   def new(conn, _params, user) do
@@ -76,6 +85,5 @@ defmodule DailyRoutine.RoutineController do
   def action(conn, _) do
     apply(__MODULE__, action_name(conn), [conn, conn.params, conn.assigns.current_user])
   end
-
 end
 
