@@ -23,6 +23,8 @@
 
 </ul>
 
+<%= render "print_pdf_form.html", changeset: @changeset, routine: @routine, action: routine_pdf_conversion_path(@conn, :create, @routine) %>
+
 <p><i>Comments:</i></p>
 <hr>
 <%= for comment <- @comments do %>

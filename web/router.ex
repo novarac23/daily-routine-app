@@ -31,7 +31,7 @@ defmodule DailyRoutine.Router do
 
     resources "/routines", RoutineController do
       resources "/comments", CommentController, only: [:create, :delete]
-      resources "/pdf_conversions", DailyRoutine.PdfConversionController, only: [:create]
+      resources "/pdf_conversions", PdfConversionController, only: [:create]
     end
   end
 end
