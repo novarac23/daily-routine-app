@@ -1,0 +1,5 @@
+<%= form_for @changeset, @action, fn f -> %>
+	<div class="form-group text-center">
+		<%= submit "Email Me This Form", class: "btn btn-primary" %>
+	</div>
+<% end %>
